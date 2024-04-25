@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Space Invader UTP EDITION</title>
+    <script src="phaser.js"></script>
+    <script src="principal.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('img/maxresdefault.jpg');
+            background-size: cover;
+        }
+
+        #portada {
+            margin-right: 20px;
+            z-index: 1; 
+            max-width: 600px;
+            max-height: 900px; 
+        }
+
+        #boton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2; 
+            cursor: pointer;
+        }
+
+        #bloque_juego {
+            width: 600px; 
+            height: 900px; 
+            display: none; 
+            position: absolute;
+            top: 60%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            z-index: 0; 
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <audio id="audioTitulo" src="audio/Titulo.mp3" preload="auto"></audio>
+    <audio id="audioJuego" src="audio/Titania.mp3" preload="auto"></audio>
+
+    <div id="overlay">
+        <img id="portada" src="img/BG.jpeg" alt="Portada del juego">
+        <img id="boton" src="img/btn.png" alt="Botón de inicio">
+    </div>
+    <div id="bloque_juego"></div>
+
+    <script>
+        var iniciarJuego = false;
+        var musicaJuego; 
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var portada = document.getElementById("portada");
+            var botonInicio = document.getElementById("boton");
+            var bloqueJuego = document.getElementById("bloque_juego");
+
+            var audioTitulo = document.getElementById("audioTitulo");
+            var audioJuego = document.getElementById("audioJuego");
+
+           
+            audioTitulo.play();
+
+            botonInicio.addEventListener("click", function() {
+                document.getElementById("overlay").style.display = "none"; 
+                bloqueJuego.style.display = "block"; 
+
+                
+                audioTitulo.pause(); 
+                audioJuego.play(); 
+
+                if (iniciarJuego) {
+                    juego.state.start('principal');
+                } else {
+                    iniciarJuego = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
